@@ -1,6 +1,6 @@
 ﻿namespace IdentityByExamples.EmailService
 {
-    public class EmailConfiguration
+    public class EmailOptions
     {
         public string From { get; set; }
         public string SmtpServer { get; set; }
