@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MimeKit;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace EmailService
+namespace IdentityByExamples.EmailService
 {
     public class Message
     {

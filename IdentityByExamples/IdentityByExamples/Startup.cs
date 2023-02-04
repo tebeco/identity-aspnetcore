@@ -1,16 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using EmailService;
+using IdentityByExamples.EmailService;
 using IdentityByExamples.Factory;
 using IdentityByExamples.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,8 +42,6 @@ namespace IdentityByExamples
                opt.TokenLifespan = TimeSpan.FromHours(2));
 
             services.AddScoped<IUserClaimsPrincipalFactory<User>, CustomClaimsFactory>();
-
-            services.AddAutoMapper(typeof(Startup));
 
             var emailConfig = Configuration
                 .GetSection("EmailConfiguration")

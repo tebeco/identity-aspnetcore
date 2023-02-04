@@ -1,27 +1,19 @@
-﻿using AutoMapper;
-using EmailService;
+﻿using IdentityByExamples.EmailService;
 using IdentityByExamples.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IdentityByExamples.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IEmailSender _emailSender;
 
-        public AccountController(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IEmailSender emailSender)
         {
-            _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -42,7 +34,13 @@ namespace IdentityByExamples.Controllers
                 return View(userModel);
             }
 
-            var user = _mapper.Map<User>(userModel);
+            var user = new User
+            {
+                UserName = userModel.Email,
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName,
+                Email = userModel.Email,
+            };
 
             var result = await _userManager.CreateAsync(user, userModel.Password);
             if (!result.Succeeded)
